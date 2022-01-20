@@ -1,8 +1,10 @@
 package es.carlosbouzas.queval.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.Hibernate;
 
 import java.sql.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "examen")
@@ -40,4 +42,16 @@ public class Examen {
     @JoinColumn(name = "area_id", nullable = false)
     private Area area;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Examen examen = (Examen) o;
+        return id != null && Objects.equals(id, examen.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

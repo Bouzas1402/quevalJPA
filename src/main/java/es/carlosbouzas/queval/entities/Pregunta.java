@@ -1,10 +1,12 @@
 package es.carlosbouzas.queval.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
-@Data
+@Table(name = "pregunta")
 public class Pregunta  {
 
     @Id
@@ -29,13 +31,17 @@ public class Pregunta  {
     @Column(name = "tiempo_restante")
     private int tiempoRestante;
 
+    private int dificultad;
 
     @ManyToOne
     @JoinColumn(name = "tema_id")
     private Tema tema;
 
-
-
+    @ManyToMany
+    @JoinTable(name = "pregunta_examen",
+            joinColumns = @JoinColumn(name = "pregunta_id"),
+            inverseJoinColumns = @JoinColumn(name = "examen_id"))
+    private Set<Examen> examenes = new LinkedHashSet<>();
 
 
 }
