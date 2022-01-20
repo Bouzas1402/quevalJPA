@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="queval:war">
+    <output-path>$PROJECT_DIR$/target/docker</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>false</exploded>
+        <module>queval</module>
+        <packaging>war</packaging>
+        <unpackNestedArchives>false</unpackNestedArchives>
+      </options>
+    </properties>
+    <root id="archive" name="queval.war">
+      <element id="artifact" artifact-name="queval:war exploded" />
+    </root>
+  </artifact>
+</component>

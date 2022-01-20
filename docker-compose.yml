@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  queval-mysql:
+    image: mysql
+    container_name: queval-mysql
+    ports: 
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: quevedo
+      MYSQL_DATABASE: quevaldb
+      MYSQL_USER: queval
+      MYSQL_PASSWORD: quevedo
+    volumes:
+      - ./db-data:/var/lib/mysql
+
+  queval-wildfly:
+    image: wildfly23
+    container_name: queval-wildfly
+    depends_on:
+      - queval-mysql
+    ports:
+      - "8080:8080"
+      - "9990:9990"
+      - "8787:8787"
+    volumes:
+      - ./target/docker:/opt/jboss/wildfly/standalone/deployments
