@@ -1,13 +1,13 @@
 package es.carlosbouzas.queval.repositorios;
 
-import jakarta.ejb.Stateless;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import es.carlosbouzas.queval.entities.Pregunta;
+import org.apache.deltaspike.data.api.EntityRepository;
+import org.apache.deltaspike.data.api.Repository;
 
-@Stateless
-public class PreguntaRepositorio {
 
-    @PersistenceContext
-    EntityManager em;
+@Repository
+public interface PreguntaRepositorio extends EntityRepository<Pregunta, Long> {
+
+
 
 }

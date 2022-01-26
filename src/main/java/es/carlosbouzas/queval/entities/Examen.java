@@ -1,33 +1,33 @@
 package es.carlosbouzas.queval.entities;
 
 import jakarta.persistence.*;
-import org.hibernate.Hibernate;
+import lombok.Data;
 
-import java.sql.Date;
-import java.util.Objects;
+import java.time.LocalDate;
 
 @Entity
+@Data
 @Table(name = "examen")
 public class Examen {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(length = 8)
+    @Column(unique = true, length = 8)
     private String codigo;
 
-    @Column(nullable = false)
     private Integer dificultad;
 
-    @Column(name = "eval_tipo", nullable = false)
-    private Integer evalTipo;
+    @Column(name = "eval_type", nullable = false)
+    private Integer evalType;
 
-    @Column(nullable = false)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "fecha_final", nullable = false)
-    private Date fechaFinal;
+    @Column(name = "fecha_final")
+    private LocalDate fechaFinal;
 
     @Column(name = "es_aleatorio", nullable = false)
     private Boolean esAleatorio = false;
@@ -35,23 +35,7 @@ public class Examen {
     @Column(name = "num_preguntas", nullable = false)
     private Integer numPreguntas;
 
-    @Column(nullable = false)
+    @Column(name = "duracion", nullable = false)
     private Integer duracion;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "area_id", nullable = false)
-    private Area area;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Examen examen = (Examen) o;
-        return id != null && Objects.equals(id, examen.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

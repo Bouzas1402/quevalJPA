@@ -24,6 +24,8 @@
 
         <!-- Wildfly server -->
         <wildfly.version>23.0.2.Final</wildfly.version>
+        <wildfly.console.username>admin</wildfly.console.username>
+        <wildfly.console.password>admin</wildfly.console.password>
 
         <!-- JUnit 5 -->
         <junit.version>5.8.2</junit.version>
@@ -32,6 +34,8 @@
         <jakarta.mvc.version>2.0.0</jakarta.mvc.version>
         <krazo.version>2.0.1</krazo.version>
 
+        <!-- DeltaSpike Data -->
+        <deltaspike.version>1.9.4</deltaspike.version>
 
     </properties>
 
@@ -57,6 +61,13 @@
                 <version>${wildfly.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.deltaspike.distribution</groupId>
+                <artifactId>distributions-bom</artifactId>
+                <version>${deltaspike.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -112,6 +123,34 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- DeltaSpike Core + Data -->
+
+        <dependency>
+            <groupId>org.apache.deltaspike.core</groupId>
+            <artifactId>deltaspike-core-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.deltaspike.core</groupId>
+            <artifactId>deltaspike-core-impl</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-data-module-api</artifactId>
+            <version>${deltaspike.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-data-module-impl</artifactId>
+            <version>${deltaspike.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -128,7 +167,16 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.version}</version>
             </plugin>
-
+            <!-- Si se quiere desplegar vía plugin con el goal wildfly:deploy -->
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>2.1.0.Final</version>
+                <configuration>
+                    <username>${wildfly.console.username}</username>
+                    <password>${wildfly.console.password}</password>
+                </configuration>
+            </plugin>
             <!-- necesario para ejecutar desde mvnw wrapper -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
