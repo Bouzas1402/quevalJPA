@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface RespuestaRepositorio extends EntityRepository<Respuesta, Long> {
 
+    Respuesta findByCodigo(String codigo);
     List<Respuesta> findByCodigoOrderByOrdenAsc(String codigo);
 
 

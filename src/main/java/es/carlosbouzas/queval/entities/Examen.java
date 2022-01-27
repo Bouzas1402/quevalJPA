@@ -20,9 +20,6 @@ public class Examen {
 
     private Integer dificultad;
 
-    @Column(name = "eval_type", nullable = false)
-    private Integer evalType;
-
     @Column(name = "nombre", nullable = false)
     private String nombre;
 

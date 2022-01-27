@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -26,7 +24,7 @@ public class Tema {
 
 
     @OneToMany(mappedBy = "tema", orphanRemoval = true)
-    private Set<Pregunta> preguntas = new LinkedHashSet<>();
+    private List<Pregunta> preguntas = new ArrayList<>();
 
 
 }

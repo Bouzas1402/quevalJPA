@@ -26,7 +26,7 @@ public class Respuesta {
 
     private Integer orden;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "pregunta_id", nullable = false)
     private Pregunta pregunta;
 

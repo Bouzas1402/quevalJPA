@@ -8,6 +8,7 @@ import org.apache.deltaspike.data.api.Repository;
 @Repository
 public interface PreguntaRepositorio extends EntityRepository<Pregunta, Long> {
 
+    Pregunta findByCodigo(String codigo);
 
-
+    Pregunta preguntaPorId(Long id);
 }
